@@ -19,9 +19,9 @@ jobs:
       - name: Test
         run: go build -v && go test ./...
       - name: Build for linux/amd64
-        run: go build -o terraformer-all-linux-amd64
+        run: CGO_ENABLED=0 go build -o terraformer-all-linux-amd64
       - name: Build for linux/arm64
-        run: GOOS=linux GOARCH=arm64 go build -o terraformer-all-linux-arm64
+        run: CGO_ENABLED=0 GOOS=linux GOARCH=arm64 go build -o terraformer-all-linux-arm64
       # - name: Build for mac
       #   run: GOOS=darwin go build -o terraformer-all-darwin-amd64
       - name: Build for mac Apple Silicon
