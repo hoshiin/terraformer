@@ -55,7 +55,9 @@ func (g *AppSignOnPolicyGenerator) InitResources() error {
 }
 
 func getAppSignOnPolicies(ctx context.Context, client *okta.Client) ([]*okta.Policy, error) {
-	qp := query.NewQueryParams(query.WithType("ACCESS_POLICY"))
+	qp := query.NewQueryParams(query.WithType("ACCESS_POLICY"),
+		// sort by name to make sure the order is consistent
+		query.WithSortBy("name"))
 	var policies []*okta.Policy
 	data, resp, err := client.Policy.ListPolicies(ctx, qp)
 	if err != nil {
